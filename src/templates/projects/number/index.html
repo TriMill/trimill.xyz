@@ -1,0 +1,32 @@
+{% set meta={"title": "Number", "desc": "make go up"} %}
+{% extends "/_base.html"%}
+{% block head%}
+<script>
+    window.onload = () => {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://api.trimill.xyz/number");
+        xhr.send();
+        xhr.onload = () => {
+            document.getElementById("number").innerHTML = xhr.responseText;
+        }
+        xhr.onerror = () => {
+            document.getElementById("number").innerHTML = "Error loading number."
+        }
+    }
+
+    function makegoup() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://api.trimill.xyz/number");
+        xhr.send();
+        xhr.onload = () => {
+            document.getElementById("number").innerHTML = xhr.responseText;
+        }
+    }
+</script>
+{% endblock %}
+{% block content%}
+<div id="number">?</div>
+<div>
+    <input type="button" value="Make go up" id="button" onclick="makegoup();" />
+</div>
+{% endblock %}

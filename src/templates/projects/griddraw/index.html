@@ -1,0 +1,48 @@
+{% set meta={"title": "Griddraw", "desc": "Draw on a grid", "pagewidth": "90%"}%}
+{% extends "/_base.html"%}
+{% block head %}
+<link href="style.css" type="text/css" rel="stylesheet" />
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="canvas.js"></script> 
+<script src="colorpicker.js"></script> 
+<script src="index.js"></script> 
+{% endblock %}
+{% block title %}{% endblock %}
+{% block content %}
+<div class="flexcontainer" style="overflow: hidden visible">
+    <div class="leftcol">
+        <h1>Griddraw</h1>
+        <hr style="margin-right: 20px" />
+        <div id="colorpicker">
+            <div class="picking-area">
+                <div class="picker"></div>
+            </div>
+            <div class="hue-picking-area">
+                <div class="hue-picker"></div>
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" id="hexcode" style="width: 100px;" value="#144bb8" />
+            <div id="colordisplay"></div>
+        </div>
+        <div>Left click - paint</div>
+        <div>Right click - erase</div>
+        <div>Middle click - pick color</div>
+        <div>
+            <input type="button" id="undo" value="&nbsp;↶ " />
+            <input type="button" id="redo" value="&nbsp;↷ " />
+            <input type="button" id="clear" value="Clear" />
+        </div>
+        <div>
+            <input type="button" id="setbg" value="Background color" />
+        </div>
+        <div>
+            <input type="button" id="setlines" value="Line color" />
+            <input type="button" id="togglelines" value="Toggle lines" />
+        </div>
+    </div>
+    <div class="rightcol scrollable">
+        <div id="canvas-wrapper"></div>
+    </div>
+</div>
+{% endblock %}

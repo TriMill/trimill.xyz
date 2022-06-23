@@ -1,0 +1,20 @@
+{% set meta={"title": "Projects", "desc": "List of projects I have made"} %}
+{% extends "/_base.html" %}
+{% block content %}
+
+<p>Here are some projects I have made over the past few years.</p>
+
+<ul>
+{% for site in data.projects %}
+{% if site.hidden != True %}
+<li>
+{% if site.star == True %}
+★
+{% endif %}
+<a href="/projects/{{ site.path }}/">{{ site.title }}</a> · {{ site.desc | safe }}
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+
+{% endblock %}

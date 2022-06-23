@@ -1,0 +1,17 @@
+{% set meta={"title": "404", "desc": "Page not found"} %}
+{% extends "/_base.html" %}
+{% block content %}
+<p>The page you have tried to access does not exist. How did you get here?</p>
+{% if request.args.get("source") == "here" %}
+<p>&gt; From another page on this site</p>
+<p>Oops! Please <a href="https://github.com/TriMill/trimill.xyz/issues/">create an issue</a> so I can fix this.</p>
+<p><a href="/">Return home</a></p>
+{% elif request.args.get("source") == "other"%}
+<p>&gt; From somewhere else</p>
+<p>Unfortunately I can only fix my own mistakes. Please inform that website's owner that their link no longer works.</p>
+<p><a href="/">Return home</a></p>
+{% else %}
+<p>&gt; <a href="?source=here">From another page on this site</a></p>
+<p>&gt; <a href="?source=other">From somewhere else</a></p>
+{% endif %}
+{% endblock %}

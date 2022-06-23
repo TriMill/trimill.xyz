@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&family=Source+Sans+Pro:wght@400&family=Fira+Mono&display=swap');
+
+@media (prefers-color-scheme: dark) {
+    :root[theme="system"] {
+        --bg: #242328;
+        --bg-intense: #141316;
+        --bg-faded: #373338;
+        --fg: #e0dedc;
+        --fg-faded: #9b9497;
+        --accent-1: #96bf59;
+        --accent-1-dark: #759438;
+        --accent-2: #789ebf;
+        --accent-2-dark: #52729d;
+        --error: #ee6d7d;
+    }
+    .only-theme-light {
+        display: none;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root[theme="system"] {
+        --bg: #f6f5f2;
+        --bg-intense: #ffffff;
+        --bg-faded: #cbc4c7;
+        --fg: #28262b;
+        --fg-faded: #989097;
+        --accent-1: #0642c3;
+        --accent-1-dark: #07136d;
+        --accent-2: #0f7904;
+        --accent-2-dark: #094a05;
+        --error: #a50518;
+    }
+    .only-theme-dark {
+        display: none;
+    }
+}
+
+:root[theme="dark"] {
+    --bg: #242328;
+    --bg-intense: #141316;
+    --bg-faded: #373338;
+    --fg: #e0dedc;
+    --fg-faded: #9b9497;
+    --accent-1: #96bf59;
+    --accent-1-dark: #759438;
+    --accent-2: #789ebf;
+    --accent-2-dark: #52729d;
+    --error: #ee6d7d;
+}
+
+:root[theme="light"] {
+    --bg: #f6f5f2;
+    --bg-intense: #ffffff;
+    --bg-faded: #cbc4c7;
+    --fg: #28262b;
+    --fg-faded: #989097;
+    --accent-1: #0642c3;
+    --accent-1-dark: #07136d;
+    --accent-2: #0d8101;
+    --accent-2-dark: #045901;
+    --error: #a50518;
+}
+
+:root[theme="contrast"] {
+    --bg: white;
+    --bg-intense: white;
+    --bg-faded: #c0c0c0;
+    --fg: black;
+    --fg-faded: #444444;
+    --accent-1: blue;
+    --accent-1-dark: darkblue;
+    --accent-2: #0088ff;
+    --accent-2-dark: #004488;
+    --error: #880000;
+}
+
+:root[theme="special"] {
+    --bg: #ffff00;
+    --bg-intense: #ffffff;
+    --bg-faded: #00ff00;
+    --fg: #ff00ff;
+    --fg-faded: #ff0000;
+    --accent-1: #00ffff;
+    --accent-1-dark: #0000ff;
+    --accent-2: #000000;
+    --accent-2-dark: #00ffff;
+    --error: #00ff88;
+    font-family: "Comic Sans MS", cursive;
+}
+
+:root {
+    color: var(--fg);
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.5;
+    --link: var(--accent-1);
+    --link-hover: var(--accent-1-dark);
+    --link-active: var(--accent-1-dark);
+    --button: var(--bg-intense);
+    --button-hover: var(--bg-faded);
+    --button-active: var(--accent-2-dark);
+    overflow-wrap: break-word;
+}
+
+h1, h2, h3, nav {
+    font-family: "Roboto Slab", serif;
+    font-weight: 500;
+    margin-left: 20px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+h1 {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+    background: var(--bg);
+    width: min(750px, 90vw);
+    margin: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+}
+
+footer {
+    text-align: center;
+    color: var(--fg-faded);
+    margin-top: auto;
+    flex-shrink: 0;
+    min-height: 50px;
+    font-size: 12px;
+}
+
+footer code {
+    font-size: 12px;
+}
+
+nav {
+    padding-top: 10px;
+    width: fit-content;
+    margin: auto;
+    font-size: 20px;
+}
+
+nav > svg {
+    position: absolute;
+    top: 16px;
+    height: 20px;
+    width: auto;
+    padding-left: 15px;
+    padding-right: 10px;
+    fill: var(--fg);
+}
+
+nav > a {
+    color: var(--fg);
+    text-decoration: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+nav > a:hover { color: var(--fg-faded); }
+
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+:root[theme="contrast"] a {
+    text-decoration: underline;
+}
+
+a:hover { color: var(--link-hover); }
+
+a:active { color: var(--link-active); }
+
+.faded {
+    color: var(--fg-faded);
+}
+
+p {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+code, pre {
+    background-color: var(--bg-intense);
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 3px;
+    font-family: "Fira Mono", monospace;
+    font-size: 18px;
+}
+
+pre {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 12px;
+    border-left: 5px solid var(--accent-2-dark);
+}
+
+button, input, select {
+    color: var(--fg);
+    background-color: var(--bg-faded);
+    border: 2px solid var(--fg-faded);
+    border-radius: 3px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+}
+
+button:active, input[type=button]:active {
+    background-color: var(--bg);
+}
+
+button:active, input[type=button]:active {
+    background-color: var(--bg);
+}
+
+.error {
+    color: var(--error);
+}

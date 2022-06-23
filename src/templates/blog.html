@@ -1,0 +1,14 @@
+{% set meta={"title": "Blog™", "desc": "Blog™"} %}
+{% extends "/_base.html" %}
+{% block content %}
+<p>Welcome to Blog™. I may on occasion add pages to here, in which case the list below will update. You can also 
+get updates delivered directly to you using the <a href="/blog/rss.xml">RSS</a> or <a href="/blog/atom.xml">Atom</a> feeds.</p>
+{% for post in data.blogposts %}
+<hr style="width: 20%"/>
+<h2 style="margin-top: 10px; margin-bottom: 10px">
+    <a href="{{ post.url }}">{{ post.title }}</a>
+</h2>
+<p class="faded">{{ post.date.isoformat() }}</p>
+<p>{{ post.desc }}</p>
+{% endfor %}
+{% endblock %}

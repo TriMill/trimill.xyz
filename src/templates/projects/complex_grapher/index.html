@@ -1,0 +1,93 @@
+{% set meta={"title": "Complex Grapher", "desc": "Graph complex functions", "pagewidth": "1400px"} %}
+{% extends "/_base.html" %}
+{% block head %}
+<style>
+.left > span { display: block; }
+.colored { color: var(--accent-2); }
+#errors { color: #ff4444; }
+.short { width: 70px; }
+main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.left, .right {
+    padding: 30px;
+}
+.category {
+    color: var(--accent-1);
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+    integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+    crossorigin="anonymous" defer>
+</script>
+<script src="webgl_base.js"></script>
+<script src="grammar.js"></script>
+<script src="main.js"></script>
+{% endblock %}
+{% block content %}
+<div class="left">
+    <span class="category">——— Equation ———</span>
+    <span>f(z) = <input type="text" id="fz" value="sin(z)/z" style="width: 400px" /></span>
+
+    <span class="category">——— Axis scale ———</span>
+    <span>Real axis: &nbsp;&nbsp;&nbsp;&nbsp; 
+        <input type="text" class="short" id="rmin" value="-10" /> 
+        to <input type="text" class="short" id="rmax" value="10" /> 
+    </span>
+    <span>Imaginary axis: 
+        <input type="text" class="short" id="imin" value="-10" /> 
+        to <input type="text" class="short" id="imax" value="10" /> 
+    </span>
+
+    <span class="category">——— Shading options ———</span>
+    <span>Shading amount: <input type="range" min="0" max="0.95" value="0.5" step="0.05" id="shading" /></span>
+    <span><input type="checkbox" id="swapbw" /> Swap black and white</span>
+    <span><input type="checkbox" id="drawcontours" /> Draw contours</span>
+    <span><input type="checkbox" id="smoothcolor" /> Smooth coloring</span>
+    <span>
+        <span class="category">——— Iteration ———</span>
+        <input type="checkbox" id="enable_iters" onchange="changeIterationMode();" />
+    </span>
+    <div id="iteration_mode" hidden>
+        <div>Iterations: <input type="number" id="iterations" value="1" /></div>
+        <div>z₀(z) = <input type="text" id="init_z" value="z" style="width: 300px" /></div>
+        <div>c(z) = <input type="text" id="init_c" value="0" style="width: 300px" /></div>
+    </div>
+
+    <!--
+    <span>
+        <span class="category">——— Approximation settings ———</span>
+        <input type="checkbox" id="show_approx" onchange="let x=document.getElementById('approx_settings');x.hidden=!x.hidden;" />
+    </span>
+    <div id="approx_settings" hidden>
+        <span>coming soon!</span>
+    </div>
+    -->
+
+    <!--
+    <span class="category">——— Constants ———</span>
+    <div id="constants-wrapper"></div>
+    <input type="button" id="const-add" value="[+]" style="color: #44ff44" onclick="addConstant()" />
+    -->
+
+    <span class="category">——— DPI ———</span>
+    <span>
+        <a href="javascript:void(0)" onclick="dpi=1; encodeURLParams()">single</a>
+        <a href="javascript:void(0)" onclick="dpi=2; encodeURLParams()">double</a>
+        <a href="javascript:void(0)" onclick="dpi=4; encodeURLParams()">quadruple</a> 
+    </span>
+    <span>&nbsp;</span>
+    <span>
+        <input type="button" id="go" value="Graph" onclick="graph()"/ > 
+        <a href="javascript:void(0)" onclick="encodeURLParams()">Generate link</a> 
+    </span>
+    <span id="errors"></span>
+    <span>&nbsp;</span>
+    <div><a href="help.html" target="_blank">Documentation</a></div>
+</div>
+<div class="right" id="canvas-wrapper">
+    <canvas id="canvas" width="640" height="640" style="width: 640px; height: 640px;"></canvas>
+</div>
+{% endblock %}

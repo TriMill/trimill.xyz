@@ -1,0 +1,50 @@
+{% set meta={"title": "Markov Word Gen", "desc": "Generate semi-random semi-pronouncable words using Markov chains"} %}
+{% extends "/_base.html"%}
+{% block head %}
+<style>
+    body, p {
+        font-size: 13pt;
+    }
+    p.nospace {
+        line-height: 0.2;
+    }
+    div.results {
+        font-family: monospace;
+    }
+</style>
+<script src="main.js"></script>
+<script src="markov.js"></script>
+<script src="presets.js"></script>
+{% endblock %}
+{% block content %}
+<p>Generates semi-random semi-pronouncable words using Markov chains. Press
+"Run Markov Chain" to generate a word. Press "Analyze frequencies" to run the
+chain many times and make a list of the output probabilities. Enter text in
+the box to create a new Markov chain from the text
+you entered.</p>
+<textarea rows="4" cols="80" id="corpus" onchange="repopulate()"> </textarea>
+<br>
+Presets:
+<select id="preset" onchange="preset()">
+<option value="lipsum">Lorem Ipsum</option>
+<option value="wikipedia">Wikipedia</option>
+<option value="names">Names</option>
+<option value="beemovie">Bee Movie</option>
+<option value="astronomy">Astronomy</option>
+
+</select>
+<br>
+<label for="min_length">Minimum length&nbsp;&nbsp;</label> <input type="number" id="min_length"
+value="3" onchange="minmax()" min="0" max="50"><br>
+<label for="max_length">Maximum length&nbsp;</label> <input type="number" id="max_length"
+value="10" onchange="minmax()" min="0" max="50"><br>
+<label for="markov_order">Markov order&nbsp;</label> <input type="number" id="markov_order"
+value="1" onchange="setOrder()" min="1" max="4">
+<p></p>
+<button id="run" onclick="repeatRun(1)">Run Markov Chain</button>
+<button id="run5" onclick="repeatRun(5)">Run 5 times</button>
+<button id="run20" onclick="repeatRun(20)">Run 20 times</button>
+<button id="analyze" onclick="analyze()">Analyze frequencies</button>
+<p>Results:</p>
+<div id="results" class="results"> </div>
+{% endblock %}

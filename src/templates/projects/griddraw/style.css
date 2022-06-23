@@ -1,0 +1,82 @@
+main {
+    max-width: 100%;
+    padding: 20px;
+    margin: 0;
+}
+main > * {
+    margin: 0;
+}
+.leftcol > * {
+    margin-bottom: 0px;
+    margin-top: 7px;
+}
+.scrollable {
+    overflow: scroll;
+}
+.flexcontainer {
+    display: flex;
+    flex-direction: row;
+}
+.leftcol {
+    flex: 400px;
+}
+.rightcol {
+    flex: 100%;
+    height: calc(100vh - 40px);
+}
+
+#colorpicker {
+    display: flex;
+    flex-direction: row;
+}
+
+.picking-area {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: -webkit-linear-gradient(top, #00000000,  #000 100%), 
+                -webkit-linear-gradient(left, #fff, #ffffff00 100%), rgb(0, 85, 255);
+    margin-right: 20px;
+    border: 1px solid #888;
+}
+
+.picker {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    top: 52px;
+    left: 174px;
+}
+.picker::before {
+    width: 6px;
+    height: 6px;
+    position: absolute;
+    border: 1px solid #000;
+}
+
+.hue-picking-area {
+    position: relative;
+    width: 30px;
+    height: 200px;
+    background: -webkit-linear-gradient(top, #f00 0%, #ff0 16.67%, #0f0 33.33%, #0ff 50%, #00f 66.67%, #f0f 83.33%, #f00 100%);
+    border: 1px solid #888;
+}
+
+.hue-picker {
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    background: #fff;
+    border: 1px solid #888;
+    top: 122px;
+}
+
+#colordisplay {
+    width: 100px;
+    margin-left: 40px;
+    height: 23px;
+    border: 1px solid #888;
+    background: rgb(20, 75, 184);
+}

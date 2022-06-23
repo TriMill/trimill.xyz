@@ -1,0 +1,45 @@
+{% set meta={"title": "zzcxz visualizer help", "desc": "Help for zzcxz visualizer", "hidden": True} %}
+{% extends "/_base.html" %}
+{% block head %}
+<style>
+    h1 {
+        color: var(--fg);
+    }
+    .option, .option:hover, .option:active {
+        color: var(--fg);
+        text-decoration: underline;
+    }
+    .option:visited{
+        color: var(--fg-faded);
+    }
+    .cyan {
+        color: #0ff;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="wrapper">
+    <p>
+    each <span class="cyan">node</span> represents one zzcxz page. clicking on a node will load all of the pages it links to. 
+    </p>
+    <p>
+    two nodes are connected with an <span class="cyan">arrow</span> if one of them links to the other. nodes and arrows colored <span class="cyan">blue</span> represent redirects. after a node has been clicked it will turn more <span class="cyan">gray</span> to indicate that all of its outgoing links have been loaded.
+    </p>
+    <p>
+    you may <span class="cyan">click and drag</span> on nodes to move them around, or on the page itself to pan. use the <span class="cyan">scroll wheel</span> to zoom.
+    </p>
+    <p>
+    the root node (by default, the zzcxz page itself) is colored <span class="cyan">green</span>.
+    </p>
+    <p>
+    click the double chevron link at the top-left corner to expand and collapse the <span class="cyan">user interface</span>. this allows you to load pages from their id, or to reset the graph completely. if you <span class="cyan">select</span> a node by right-clicking it, information about it will also show up here. deselect by pressing <span class="cyan">esc</span>.
+    </p>
+    <p>
+    if you append <span class="cyan">?skip</span> to the URL of the main page, it will bypass the spoiler warning.
+    </p>
+    <ul>
+        <li><a href="../zzcxz_vis" class="option">go back</a></li>
+        <li><a href="" class="option">do not go back</a></li>
+    </ul>
+</div>
+{% endblock %}

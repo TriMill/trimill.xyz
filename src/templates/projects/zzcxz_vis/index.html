@@ -1,0 +1,79 @@
+{% set meta={"title": "zzcxz visualizer", "desc": "Visualize the structure of <a href=https://zzcxz.citrons.xyz/>zzcxz</a>"} %}
+{% extends "/_base.html" %}
+{% block head %}
+<style>
+    main, #graph {
+        height: 100%;
+    }
+    main {
+        position: relative;
+    }
+    h1 {
+        color: var(--fg);
+    }
+    .option, .option:hover, .option:active {
+        color: var(--fg);
+        text-decoration: underline;
+    }
+    .option:visited{
+        color: var(--fg-faded);
+    }
+    .cyan {
+        color: #0ff;
+    }
+    .uielems {
+        position: absolute; 
+        top: 20px; 
+        left: 20px; 
+        padding-right: 10px; 
+    }
+    .border {
+        border-right: 1px solid var(--fg);
+    }
+    .bl { 
+        display: block;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+</style>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+<script src="index.js"></script> 
+{% endblock %}
+{% block content %}
+<div id="spoiler">
+    <p>
+    you are about to view a force directed graph of <span class="cyan">zzcxz</span>, a collaborative interactive fiction website by <span class="cyan">citrons</span>. this will contain <span class="cyan">spoilers</span> for zzcxz, so i strongly recommend you try it out before continuing. common side effects of continuing without using zzcxz first include intense guilt, deep regret, immediate apification, and feelings of worthlessness.
+    </p>
+    <p>
+    note: at time of writing (2022-06-23), zzcxz and all other citrons-created content is offline. zzcxz visualizer will not work until it is no longer offline.
+    </p>
+    <ul>
+        <li><a href="https://zzcxz.citrons.xyz/" class="option">visit zzcxz (recommended)</a></li>
+        <li><a href="https://citrons.xyz/" class="option">visit citrons' website</a></li>
+        <li><a href="help.html" class="option">view the help page</a></li>
+        <li><a href="javascript:void(0)" class="option" onclick="visualize()">continue to zzcxz visualizer</a></li>
+    </ul>
+</div>
+
+<div id="graph" style="width: 90vw;"></div>
+
+<div class="uielems border" id="ui" hidden>
+    <div><a href="javascript:void(0)" id="contract-link">&lt;&lt;</a></div>
+    Load page: 
+    <input type="text" style="width: 6ch" id="load-page" />
+    <input class="bl" type="button" value="Clear" id="clear-nodes" />
+    <input class="bl" type="button" value="Toggle labels" id="toggle-labels" />
+    <div id="selected-node" hidden>
+        <hr />
+        <div><b>Selected node</b></div>
+        <div><b>title:</b> <span id="selected-node-title"></span></div>
+        <div><b>id:</b> <span id="selected-node-id"></span></div>
+        <div><b>link:</b> <a id="selected-node-link" target="_blank">link</a></div>
+    </div>
+</div>
+<div class="uielems" id="uiexpand" hidden>
+    <a href="javascript:void(0)" id="expand-link">&gt;&gt;</a>
+</div>
+{% endblock %}
+

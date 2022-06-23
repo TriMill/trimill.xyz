@@ -1,0 +1,51 @@
+{% set meta = {"title": "Home", "desc": "Home page"} %}
+{% extends "/_base.html" %}
+{% block content %}
+
+<p>
+Welcome! On this website you may view a multitude of content, including numerous 
+<a href="/projects/">projects</a>, a <a href="/blog/">Blog™</a>, and various other information contained on 
+this page. Enjoy.
+</p>
+
+<h2>About</h2>
+<p>
+I am a person (proof of this fact is left to the reader) who has been granted an internet connection and uses 
+it extensively for assorted purposes.  Much of my time not spent sleeping is spent doing mathematics, 
+programming (preferably in Rust), Minecraft, conlangs, twisty puzzles, and chess (although I am quite bad at it).
+</p>
+<h2>GEORGE</h2>
+<p>
+<a href="https://george.gh0.pw">GEORGE</a> is a webring of which I am a member. Use the standard-issue GEORGEbox 
+below to view the GEORGE homepage or access the previous and next members in the ring. GEORGE is inevitable.
+</p>
+{% if theme == "light" %}
+<iframe height="50" src="https://george.gh0.pw/embed.cgi?trimill&c_bg=%23f6f5f2&c_fg=%2328262b&c_links=%230642c3&c_george=%230d8101" style="border:none;width:100%;" sandbox="allow-top-navigation"></iframe>
+{% elif theme == "contrast" %}
+<iframe height="50" src="https://george.gh0.pw/embed.cgi?trimill" style="border:none;width:100%;" sandbox="allow-top-navigation"></iframe>
+{% elif theme == "special" %}
+<iframe height="50" src="https://george.gh0.pw/embed.cgi?trimill&c_bg=%23ffff00&c_fg=%23ff00ff&c_links=%2300ffff&c_george=%2300ff00" style="border:none;width:100%;" sandbox="allow-top-navigation"></iframe>
+{% elif theme == "system" %}
+<iframe height="50" class="only-theme-dark" src="https://george.gh0.pw/embed.cgi?trimill&c_bg=%23242328&c_fg=%23e0dedc&c_links=%2396bf59&c_george=%23789ebf" style="border:none;width:100%;" sandbox="allow-top-navigation"></iframe>
+<iframe height="50" class="only-theme-light" src="https://george.gh0.pw/embed.cgi?trimill&c_bg=%23f6f5f2&c_fg=%2328262b&c_links=%230642c3&c_george=%230d8101" style="border:none;width:100%;" sandbox="allow-top-navigation"></iframe>
+{% else %}
+<iframe height="50" src="https://george.gh0.pw/embed.cgi?trimill&c_bg=%23242328&c_fg=%23e0dedc&c_links=%2396bf59&c_george=%23789ebf" style="border:none;width:100%;" sandbox="allow-top-navigation"></iframe>
+{% endif %}
+
+<h2>Other places I exist</h2>
+<p>
+Email: trimill012 ("at" sign) gmail (full stop) com <br />
+Discord: TriMill#6898 <br />
+GitHub: <a href="https://github.com/TriMill/">TriMill</a> <br />
+Youtube: <a href="https://www.youtube.com/channel/UC2rXSxR9jbihjAE8dAIKCaw">TriMill</a> <br />
+</p>
+
+<h2>Source code & attribution</h2>
+<p>
+The source code for this website is available <a href="https://github.com/TriMill/trimill.xyz/">on GitHub</a> and is 
+released under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPLv3</a> free and open-source license.
+It is built using the <a href="https://flask.palletsprojects.com/en/2.1.x/">Flask</a> web framework and incorporates
+icons from <a href="https://useiconic.com/open">Open Iconic</a>. 
+</p>
+
+{% endblock %}

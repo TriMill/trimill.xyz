@@ -1,0 +1,139 @@
+{% set meta={"title": "Complex Grapher Documentation", "desc": "Documentation for Complex Grapher", "hidden": True} %}
+{% extends "/_base.html" %}
+{% block content %}
+<p>
+Complex Grapher is an online tool to visualize complex functions using <a href="https://en.wikipedia.org/wiki/Domain_coloring">domain coloring</a>. This help guide assumes basic knowledge about how complex numbers and domain coloring work, Wikipedia links will be provided for further explanation.
+</p>
+<p>Complex Grapher requires a browser that supports WebGL 3.0 or greater.</p>
+
+<h2>The user interface</h2>
+
+<p> 
+<ul>
+    <li><b>Equation</b> - Enter the function you want to graph here, in terms of <code>z</code>. See below for information about the syntax of expressions.</li>
+    <li><b>Axis scale</b> - Set the bounds of the real and imaginary axes. The first number in each pair is the left/bottom side of the canvas, the second number is the top/right side.</li>
+    <li><b>Shading amount</b> - Control how much black/white shading is applied to numbers close to 0 or ∞. Furthest left is no shading (however, values equal to 0 or ∞ will still be black and white, respectively).</li>
+    <li><b>Swap black and white</b> - Check this to instead use black for ∞ and white for 0.</li>
+    <li><b>Draw contours</b> - Draw rings at integer distances from the origin. The first ring (about the unit circle) is white, the rest are black.</li>
+    <li><b>Smooth coloring</b> - Use a smoother coloring method.</li>
+    <li><b>Iteration</b>
+        This section allows you to iterate the function you put in above a set number of times (that is, call the function on its own output repeatedly). If iteration is enabled, you may also use the variables <code>c</code> and <code>n</code> in your function. <code>c</code> will remain constant throughout the iterations, and <code>n</code> represents the current iteration number (starting with 0).
+        <ul>
+            <li><b>Iterations</b> - How many times to iterate the function.</li>
+            <li><b>z₀(z)</b> - The initial value for <code>z</code></li>
+            <li><b>c(z)</b> - The initial value for <code>c</code></li>
+        </ul>
+    </li>
+    <li><b>Arg offset</b> - use different branches of functions by changing where the branch cut of <code>arg(z)</code> is.</li>
+    <li><b>DPI</b> - Control the resolution of the canvas. "single" uses the browser's default, "double" uses twice that on both axes (resulting in 4 times as many pixels), "quadruple" uses four times that (16 times as many pixels). These links will save the graph as a URL parameter and reload the page.</li>
+    <li><b>Graph</b> - Self-explanatory.</li>
+    <li><b>Generate link</b> - Generate a link containing all of the equations and settings currently applied.</li>
+</ul>
+</p>
+
+<h2>Syntax</h2>
+
+<div class="codeblock"><pre>
+level0 := level1 (("+" | "-") level1)*
+level1 := level2 (("*" | "/") level2)*
+level2 := (level3 "^")* level3
+level3 := "(" level0 ")"
+    | "{" condition "}"
+    | name "(" (level0 ",")* level0 ")"
+    | name
+    | imag
+    | real
+    | "-" level1
+condition := level0 ":" level0 "," condition
+    | level0
+name := /[a-zA-Z_√Γπτγ]+/
+real := number
+imag := number "i"
+number := ("+" | "-")? digits "." digits
+    | ("+" | "-")? digits "."
+    | ("+" | "-")? "." digits
+    | ("+" | "-")? digits
+digits := /[0-9]+/
+whitespace = /[ \t\n\r]*/
+</pre></div>
+
+<h3>Numbers</h3>
+<p>
+Real numbers can be written in standard base-10 form (ex. <code>37</code>, <code>-1045</code>, <code>33.26258</code>). Imaginary numbers can be written similarly, but followed by an <code>i</code> (ex. <code>3i</code>, <code>-25i</code>, <code>.37i</code>). <code>i</code> can also be used alone. Complex numbers can be expressed simply as the sum of a real and an imaginary number (ex. <code>3-5i</code>, <code>.7+52i</code>).
+</p>
+<h3>Operators</h3>
+<p>
+The five basic operators are <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, and <code>^</code> (exponentiation). These follow the normal order of operations, with <code>^</code> being right associative (so 2^3^4 = 2^(3^4), not (2^3)^4). Parentheses <code>( )</code> can be used for grouping.
+</p>
+<h3>Variables and constants</h3>
+<p>
+In <code>f(z)</code>, the variables <code>z</code>, <code>c</code>, and <code>n</code> are available. <code>z</code> is the argument of the function, and <code>c</code> and <code>n</code> are used for iteration as described above. In <code>z₀(z)</code> and <code>c(z)</code>, the only variable available is <code>z</code>.
+</p>
+<p>
+The constants <code>e</code>, <code>tau</code> or <code>τ</code>, <code>pi</code> or <code>π</code> (= τ/2), and <code>emg</code> or <code>γ</code> (the <a href="https://en.wikipedia.org/wiki/Euler%27s_constant">Euler–Mascheroni constant</a>) are available
+</p>
+<h3>Functions</h3>
+<p>
+Functions are written as the funciton name followed by the argument in parentheses. All functions only take one argument. Examples: <code>sin(z)</code>, <code>gamma(3+2i)</code>, <code>conj(1/z)</code>.
+</p>
+<p>
+The following functions are available: 
+<ul>
+    <li><code>re</code> and <code>im</code> - the real or imaginary part of a complex number, respectively</li>
+    <li><code>abs</code> - absolute value (Euclidean distance from the origin)</li>
+    <li><code>arg</code> - the argument (angle about the origin in the range (-π,π])</li>
+    <li><code>norm</code> - the norm (equal to <code>abs(z)^2</code> and <code>re(z)^2 + im(z)^2</code>)</li>
+    <li><code>conj</code> - complex conjugate</li>
+    <li><code>sqrt</code> or <code>√</code> - square root (equal to <code>z^0.5</code>)</li>
+    <li><code>root</code> - nth root (first argument is radicand, second is index)</li>
+    <li><code>exp</code> - the exponential function (equal to <code>e^z</code>)</li>
+    <li><code>ln</code> - the natural logarithm</li>
+    <li><code>log</code> - logarith with base, where the base is the second argument (defaults to e)</li>
+    <li><code>recip</code> - reciprocal, equivalent to <code>1/z</code></li>
+    <li><code>sin cos tan</code> - sine, cosine and tangent</li>
+    <li><code>asin acos atan</code> - <a href="https://en.wikipedia.org/wiki/Inverse_trigonometric_functions">inverse</a> sine, cosine and tangent</li>
+    <li><code>sinh cosh tanh</code> - <a href="https://en.wikipedia.org/wiki/Hyperbolic_functions">hyperbolic</a> sine, cosine and tangent</li>
+    <li><code>asinh acosh atanh</code> - <a href="https://en.wikipedia.org/wiki/Inverse_hyperbolic_functions">inverse hyperbolic</a> sine, cosine and tangent</li>
+    <li><code>gamma</code> or <code>Γ</code> - the <a href="https://en.wikipedia.org/wiki/Gamma_function">gamma</a> function</li>
+    <li><code>unitcircle</code> - set abs(z) to 1, normalizing the complex number to the unit circle</li>
+    <li><code>signre</code> - the sign of the real part of z (1 if <code>re(z)</code>&gt;0, -1 if <code>re(z)</code>&lt;0, 0 if <code>re(z)</code>=0</li>
+    <li><code>signim</code> - the sign of the imaginary part of z (1 if <code>im(z)</code>&gt;0, -1 if <code>im(z)</code>&lt;0, 0 if <code>im(z)</code>=0</li>
+    <li><code>lambertw</code> - the <a href="https://en.wikipedia.org/wiki/Lambert_W_function">Lambert W function</a></li>
+</ul>
+</p>
+<p>
+The following functions are currently experimental and may be changed or removed later:
+</p>
+<ul>
+    <li><code>digamma</code> - the <a href="https://en.wikipedia.org/wiki/Digamma_function">digamma function</a></li>
+    <li><code>loggamma</code> - the <a href="https://en.wikipedia.org/wiki/Gamma_function#The_log-gamma_function">log-gamma function</a></li>
+    <li><code>loggamma</code> or <code>lngamma</code> - the <a href="https://en.wikipedia.org/wiki/Gamma_function#The_log-gamma_function">log-gamma function</a></li>
+    <li><code>erf</code> - the <a href="https://en.wikipedia.org/wiki/Error_function">error function</a></li>
+    <li><code>eulerfn</code> - the <a href="https://en.wikipedia.org/wiki/Euler_function">Euler function</a></li>
+    <li><code>ti</code> - the <a href="https://en.wikipedia.org/wiki/Inverse_tangent_integral">inverse tangent integral</a></li>
+</ul>
+<h3>Conditionals</h3>
+<p>
+Conditionals (using curly braces <code>{ }</code>) can be used like if-statements to pick an expression from a list. They take the form <code>{condition1: expression1, condition2: expression2, expression3}</code>. The conditions are evaluated from left to right, once the first true one is reached the corresponding expression is evaluated. The final expression (with no condition) acts as a fallback if none of the previous conditions were true. A condition is true if the real part of the result is strictly positive.
+</p>
+<p>
+Example: <code>{z-3: 2*z, z-2: z^2, 1/z}</code> will evaluate to <code>2*z</code> whenever <code>re(z)</code>&gt;3 (<code>re(z-3)</code>&gt;0), otherwise to <code>z^2</code> whenever <code>re(z)</code>&gt;2, otherwise to <code>1/z</code>.
+</p>
+<p>
+Conditionals are currently experimental and may be changed later.
+</p>
+<h2>A word of caution</h2>
+<p>
+WebGL is very prone to crashing, especially when using iteration. Some operations, like addition and multiplication, are very fast and should not cause too many problems. Others, like <code>exp(z)</code> and <code>sinh(z)</code> are fairly fast since they are implemented directly in the hardware. But some functions, like <code>lambertw(z)</code> and <code>gamma(z)</code> are a lot slower due to their slow implementations. For the best performance, avoid mixing slow functunctions, high iteration counts, and high DPI settings together.
+</p>
+<h2>Example graphs</h2>
+<ul>
+    <li><a href=".?src=eyJleHByIjoiKHpeMyArIHopLygyKnpeMiAtIDEpIiwiYXhlcyI6WyItMiIsIjIiLCItMiIsIjIiXSwic2hhZGluZyI6IjAuNDUiLCJzd2FwYnciOmZhbHNlLCJjb250b3VycyI6ZmFsc2UsIml0ZXJtb2RlIjpmYWxzZX0">Rational equation</a></li>
+    <li><a href=".?src=eyJleHByIjoiZXhwKDEveikiLCJheGVzIjpbIi0xIiwiMSIsIi0xIiwiMSJdLCJzaGFkaW5nIjoiMC41Iiwic3dhcGJ3IjpmYWxzZSwiY29udG91cnMiOmZhbHNlLCJpdGVybW9kZSI6ZmFsc2V9">Essential singularity</a></li>
+    <li><a href=".?src=eyJleHByIjoiel56Xnpeel56IiwiYXhlcyI6WyItOCIsIjgiLCItOCIsIjgiXSwic2hhZGluZyI6IjAuNDUiLCJzd2FwYnciOmZhbHNlLCJjb250b3VycyI6ZmFsc2UsIml0ZXJtb2RlIjpmYWxzZX0=">Power Tower</a></li>
+    <li><a href=".?src=eyJleHByIjoiY156IiwiYXhlcyI6WyItOCIsIjgiLCItOCIsIjgiXSwic2hhZGluZyI6IjAuNDUiLCJzd2FwYnciOmZhbHNlLCJjb250b3VycyI6ZmFsc2UsIml0ZXJtb2RlIjp7Iml0ZXJzIjoiMjAyIiwiemluaXQiOiJ6IiwiY2luaXQiOiJ6In19">Infinite power tower</a></li>
+    <li><a href=".?src=eyJleHByIjoieiAtICh6XjMgLSAxKS8oMyp6XjIpIiwiYXhlcyI6WyItNSIsIjUiLCItNSIsIjUiXSwic2hhZGluZyI6IjAuNDUiLCJzd2FwYnciOmZhbHNlLCJjb250b3VycyI6ZmFsc2UsIml0ZXJtb2RlIjp7Iml0ZXJzIjoiMjAiLCJ6aW5pdCI6InoiLCJjaW5pdCI6IjAifX0=">Newton's fractal</a></li>
+    <li><a href=".?src=eyJleHByIjoiel4yICsgYyIsImF4ZXMiOlsiLTIiLCIxIiwiLTEuNSIsIjEuNSJdLCJzaGFkaW5nIjoiMC41Iiwic3dhcGJ3Ijp0cnVlLCJjb250b3VycyI6ZmFsc2UsIml0ZXJtb2RlIjp7Iml0ZXJzIjoiMjAwIiwiemluaXQiOiIwIiwiY2luaXQiOiJ6In19">The Mandelbrot set</a></li>
+    <li><a href=".?src=eyJleHByIjoieiAqICgxIC0gY14obisxKSkiLCJheGVzIjpbIi0xLjEiLCIxLjEiLCItMS4xIiwiMS4xIl0sInNoYWRpbmciOiIwLjQ1Iiwic3dhcGJ3IjpmYWxzZSwiY29udG91cnMiOmZhbHNlLCJpdGVybW9kZSI6eyJpdGVycyI6IjYwIiwiemluaXQiOiIxIiwiY2luaXQiOiJ6In19">The Euler function as an infinte product</a></li>
+<ul>
+{% endblock %}

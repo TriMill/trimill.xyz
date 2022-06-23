@@ -1,0 +1,163 @@
+{% set meta={"title": "Rock Paper SHAssors", "desc": "Rock paper scissors with arbitrary strings"} %}
+{% extends "/_base.html"%}
+{% block head%}
+<script>
+let home, game, winscreen, error;
+let create, joincodeInput, join;
+let joincodeOutput, divMove, move, waitingForOpponent, divSubmit, submit, submitted, opponentSubmitted;
+let win, lose, tie, winresponse, loseresponse, winlose, tieresp, tieresponse, reset;
+
+let ws;
+let token;
+
+function onCreate() {
+    ws.send(JSON.stringify({ty:"create"}));
+}
+
+function onJoin() {
+    const joincode = joincodeInput.value;
+    ws.send(JSON.stringify({ty:"join",code:joincode}));
+}
+
+function onSubmit() {
+    const str = move.value;
+    ws.send(JSON.stringify({ty:"submit",token:token,str:str}));
+}
+
+function onReset() {
+    ws.send(JSON.stringify({ty:"reset",token:token}));
+}
+
+function onMessage(event) { 
+    const packet = JSON.parse(event.data);
+    console.log(packet);
+    if(packet.ty === "joined") {
+        error.textContent = "";
+        token = packet.token;
+        home.hidden = true;
+        game.hidden = false;
+        winscreen.hidden = true;
+        move.value = "";
+    } else if(packet.ty === "status") {
+        joincodeOutput.textContent = packet.joincode;
+        if(packet.player.submitted) {
+            submitted.hidden = false;
+            divSubmit.hidden = true;
+            divMove.hidden = true;
+        } else {
+            submitted.hidden = true;
+            divMove.hidden = false;
+            if(packet.opponent.connected) {
+                divSubmit.hidden = false;
+            } else {
+                divSubmit.hidden = true;
+            }
+        }
+        if(packet.opponent.connected) {
+            waitingForOpponent.hidden = true;
+        } else {
+            waitingForOpponent.hidden = false;
+        }
+        if(packet.opponent.submitted) {
+            opponentSubmitted.hidden = false;
+        } else {
+            opponentSubmitted.hidden = true;
+        }
+    } else if(packet.ty === "win") {
+        error.textContent = "";
+        home.hidden = true;
+        game.hidden = true;
+        winscreen.hidden = false;
+        win.hidden = true;
+        lose.hidden = true;
+        tie.hidden = true;
+        if(packet.win === "tie") {
+            winloseresp.hidden = true;
+            tieresp.hidden = false;
+            tie.hidden = false;
+            tieresponse.textContent = packet.response;
+        } else {
+            winloseresp.hidden = false;
+            tieresp.hidden = true;
+            if(packet.win === true) {
+                win.hidden = false;
+            } else if(packet.win === false) {
+                lose.hidden = false;
+            }
+            winresponse.textContent = packet.winresponse;
+            loseresponse.textContent = packet.loseresponse;
+        }
+    } else if(packet.ty === "reset") {
+        error.textContent = "";
+        home.hidden = true;
+        game.hidden = false;
+        winscreen.hidden = true;
+        move.value = "";
+    } else if(packet.ty === "error") {
+        error.textContent = packet.msg;
+    }
+}
+
+window.onload = () => {
+    ws = new WebSocket("wss://api.trimill.xyz/rpsha");
+    //ws = new WebSocket("wss://localhost:12421");
+    ws.addEventListener("message", onMessage);
+
+    home = document.getElementById("home");
+    game = document.getElementById("game");
+    winscreen = document.getElementById("winscreen");
+    error = document.getElementById("error");
+    create = document.getElementById("create");
+    joincodeInput = document.getElementById("joincode-input");
+    join = document.getElementById("join");
+    joincodeOutput = document.getElementById("joincode-output");
+    divMove = document.getElementById("div-move");
+    move = document.getElementById("move");
+    waitingForOpponent = document.getElementById("waiting-for-opponent");
+    divSubmit = document.getElementById("div-submit");
+    submit = document.getElementById("submit");
+    submitted = document.getElementById("submitted");
+    opponentSubmitted = document.getElementById("opponent-submitted");
+    win = document.getElementById("win");
+    lose = document.getElementById("lose");
+    tie = document.getElementById("tie");
+    winloseresp = document.getElementById("winloseresp");
+    winresponse = document.getElementById("winresponse");
+    loseresponse = document.getElementById("loseresponse");
+    tieresp = document.getElementById("tieresp");
+    tieresponse = document.getElementById("tieresponse");
+    reset = document.getElementById("reset");
+
+    create.onclick = onCreate;
+    join.onclick = onJoin;
+    submit.onclick = onSubmit;
+    reset.onclick = onReset;
+};
+</script>
+
+{% endblock %}
+{% block content %}
+<div id="home">
+    <p>Free yourself from the confines of the ternary.</p>
+    <div><input type="button" value="Create game" id="create" /></div>
+    <div><input type="text" id="joincode-input" /><input type="button" value="Join game" id="join" /></div>
+</div>
+<div id="game" hidden>
+    <div>Join code: <code id="joincode-output"></code></div>
+    <div id="div-move">Your move: <input type="text" id="move" /> (enter anything)</div>
+    <div id="waiting-for-opponent">Waiting for opponent...</div>
+    <div id="div-submit" hidden><input type="button" value="Submit" id="submit" /></div>
+    <div id="submitted" hidden>Submitted.</div>
+    <div id="opponent-submitted" hidden>Opponent submitted.</div>
+</div>
+<div id="winscreen" hidden>
+    <div id="win" hidden>You won!</div>
+    <div id="lose" hidden>You lost!</div>
+    <div id="tie" hidden>You tied!</div>
+    <div id="winloseresp">"<span id="winresponse"></span>" beats "<span id="loseresponse"></span>"</div>
+    <div id="tieresp">You both entered "<span id="tieresponse"></span>"</div>
+    <input type="button" value="Reset" id="reset" />
+</div>
+<div id="error" class="error"></div>
+{% endblock %}
+

@@ -1,0 +1,17 @@
+---
+layout: default
+title: Whoami
+description: List information that websites you visit can know about you
+---
+
+<h1>Whoami?</h1>
+You are:<br>
+<div id="results" style="font-family: 'Cousine';"></div><br>
+<input type="button" id="location" value="View location data" onclick="requestLocation()"/><span id="lbr"><br><br></span>
+Whoami uses <a href="https://github.com/faisalman/ua-parser-js">UAParser</a> to parse user-agent strings
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous">
+</script>
+<script src="main.js"></script>
+<script src="ua-parser.js"></script>

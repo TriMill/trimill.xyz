@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" theme="{{ theme }}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ meta.title }} - TriMill</title>
+
+    <meta name="author" content="TriMill" />
+    <meta name="description" content="{{ meta.desc }}" />
+    <meta property="og:description" content="{{ meta.desc }}" />
+    <meta property="og:title" content="{{ meta.title }}" />
+    <meta property="og:site_name" content="trimill.xyz" />
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='logo16.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='logo32.png') }}" />
+    <link rel="icon" type="image/png" sizes="64x64" href="{{ url_for('static', filename='logo64.png') }}" />
+    <link rel="icon" type="image/png" sizes="320x320" href="{{ url_for('static', filename='logo320.png') }}" />
+    <link rel="icon" type="image/png" sizes="640x640" href="{{ url_for('static', filename='logo640.png') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <style>
+        body {
+            {% if meta.fullscreen == True %}
+            width: 100%;
+            {% else %}
+            width: min({{ meta.pagewidth or "750px"}}, 90vw);
+            {% endif %}
+        }
+    </style>
+
+    <meta itemprop="name" content="{{ meta.title }}" />
+    <meta itemprop="description" content="{{ meta.desc }}" />
+ 
+    <script>
+        function updateTheme() {
+            let theme = "{{ theme }}" || "dark";
+            let new_theme;
+            if(event.shiftKey) {
+                new_theme = "special";
+            } else {
+                new_theme = {{ data.next_theme | safe }}[theme] || "dark";
+            }
+            let expiry = new Date().getTime() + 1000*60*60*24*90;
+            document.cookie = "theme=" + new_theme
+                + ";expires=" + expiry
+                + ";path=/";
+            location.reload();
+        }
+    </script>
+    {% block head %} {% endblock %}
+</head>
+<body>
+    {% if meta.fullscreen != True %}
+    <nav>
+        <a href="/">Home</a> ·
+        <a href="/projects/">Projects</a> ·
+        <a href="/blog/">Blog™</a> ·
+        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" onclick="updateTheme()">
+            {% if theme == "dark" %}
+            <path d="M2.72 0c-1.58.53-2.72 2.02-2.72 3.78 0 2.21 1.79 4 4 4 1.76 0 3.25-1.14 3.78-2.72-.4.13-.83.22-1.28.22-2.21 0-4-1.79-4-4 0-.45.08-.88.22-1.28z" />
+            <title>Dark theme</title>
+            {% elif theme == "light" %}
+            <path d="M4 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm-2.5 1c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm5 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm-2.5 1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-3.5 1.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm7 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm-6 2.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm5 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm-2.5 1c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5z"/>
+            <title>Light theme</title>
+            {% elif theme == "contrast" %}
+            <path d="M4 0c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0 1c1.66 0 3 1.34 3 3s-1.34 3-3 3v-6z" />
+            <title>High contrast theme</title>
+            {% elif theme == "special" %}
+            <image href="/static/i/apioform1.png" width="8" height="8" />
+  transform="translate(0 1)" />
+            <title>Ocular apiation occuring, do not close page until eyes have been apiated to completion.</title>
+            {% else %}
+            <path d="M3.41 0a.5.5 0 0 0-.13.06l-3 1.5a.5.5 0 1 0 .44.88l3-1.5a.5.5 0 0 0-.31-.94zm1 1.5a.5.5 0 0 0-.13.06l-4 2a.5.5 0 1 0 .44.88l4-2a.5.5 0 0 0-.31-.94zm0 2a.5.5 0 0 0-.13.06l-3 1.5a.5.5 0 0 0 .22.94h2a.5.5 0 0 0 .16-1l1.06-.56a.5.5 0 0 0-.31-.94zm-2.56 3.5a.5.5 0 0 0 .16 1h1a.5.5 0 1 0 0-1h-1a.5.5 0 0 0-.09 0 .5.5 0 0 0-.06 0z" transform="translate(1)" />
+            <title>System default theme</title>
+            {% endif %}
+        </svg>
+    </nav>
+    <hr style="width: 100%"/>
+    {% block title %}
+    <h1>{{ meta.title }}</h1>
+    {% endblock %}
+    {% endif %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    {% if meta.fullscreen != True %}
+    <footer>
+        {{ data.feet | random | safe }}
+    </footer>
+    {% endif %}
+</body>
+</html>

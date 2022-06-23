@@ -1,0 +1,95 @@
+{% set meta={"title": "Fraction to base n", "desc": "Convert fractions to digit expansions in different bases"} %}
+{% extends "/_base.html" %}
+{% block head %}
+<script>
+const SYMBOLS = "0123456789abcdefghijklmnopqrstuvwxyz";
+
+function getInputs() {
+    const errorDiv = document.getElementById("error");
+    error.textContent = "";
+    const numer = parseInt(document.getElementById("numer").value);
+    const denom = parseInt(document.getElementById("denom").value);
+    const base = parseInt(document.getElementById("base").value);
+    const digits = parseInt(document.getElementById("digits").value);
+    if(isNaN(numer) || isNaN(denom) || isNaN (base) || isNaN(digits)) {
+        errorDiv.textContent = "Error: inputs must be integers";
+        return;
+    }
+    const blockform = document.getElementById("blockform").checked;
+    if(denom === 0) {
+        errorDiv.textContent = "Error: denominator must be nonzero";
+        return;
+    }
+    if(base < 2) {
+        errorDiv.textContent = "Error: base must be 2 or greater";
+        return;
+    }
+    if(!blockform && base > 36) {
+        errorDiv.textContent = "Error: bases greater than 36 require block form";
+        return;
+    }
+    if(digits < 0) {
+        errorDiv.textContent = "Error: digit count must be nonnegative";
+        return;
+    }
+
+    return [numer, denom, base, digits, blockform];
+}
+
+function calc() {
+    [numer, denom, base, digits, blockform] = getInputs();
+    console.log(numer, denom, base, digits, blockform);
+    const sign = Math.sign(numer * denom);
+    numer = Math.abs(numer);
+    denom = Math.abs(denom);
+    const intpart = Math.floor(numer / denom);
+    const fracpart = numer % denom;
+    
+    // int part
+    let intpartDigits = [];
+    let num = intpart;
+    while(num !== 0) {
+        intpartDigits.push(num % base);
+        num = Math.floor(num / base);
+    }
+    intpartDigits.reverse();
+
+    let fracpartDigits = [];
+    num = fracpart;
+    for(let i = 0; i < digits && num !== 0; i++) {
+        num *= base;
+        fracpartDigits.push(Math.floor(num / denom));
+        num %= denom
+    }
+
+    let result = (sign === -1 ? "-" : "");
+    if(blockform) {
+        let intpartStr = intpartDigits.join(":");
+        if(intpartStr.length == 0) { intpartStr = "0"; }
+        let fracpartStr = fracpartDigits.join(":")
+        if(fracpartStr.length > 0) { fracpartStr = "." + fracpartStr + ":"; }
+        result += intpartStr + fracpartStr;
+    } else {
+        let intpartStr = intpartDigits.map(x => SYMBOLS[x]).join("");
+        if(intpartStr.length == 0) { intpartStr = "0"; }
+        let fracpartStr = fracpartDigits.map(x => SYMBOLS[x]).join("")
+        if(fracpartStr.length > 0) { fracpartStr = "." + fracpartStr; }
+        result += intpartStr + fracpartStr;
+    }
+
+    document.getElementById("result").textContent = result;
+}
+</script>
+{% endblock%}
+{% block content%}
+
+<div>Numerator: <input type="number" id="numer" /></div>
+<div>Denominator: <input type="number" id="denom" /></div>
+<div>Base: <input type="number" id="base" /></div>
+<div>Digits: <input type="number" id="digits" /></div>
+<div><input type="checkbox" id="blockform" /> Show block form</div>
+<div><input type="button" id="calc" value="Calculate" onclick="calc();" /></div>
+<div>Result:&nbsp;<span id="result" style="color: var(--accent-2);"></span></div>
+<div id="error" class="error"></div>
+
+{% endblock %}
