@@ -2,24 +2,27 @@
 {% extends "/_base.html"%}
 {% block head%}
 <script>
+    const url = "wss://api.trimill.xyz/number";
+    let ws = undefined;
+
     window.onload = () => {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "https://api.trimill.xyz/number");
-        xhr.send();
-        xhr.onload = () => {
-            document.getElementById("number").innerHTML = xhr.responseText;
-        }
-        xhr.onerror = () => {
-            document.getElementById("number").innerHTML = "Error loading number."
+        try {
+            ws = new WebSocket(url);
+            ws.addEventListener("message", msg => {
+                document.getElementById("error").textContent = "";
+                document.getElementById("number").textContent = msg.data;
+                console.log(msg);
+            });
+        } catch(e) {
+            document.getElementById("error").textContent = "Error connecting to server: " + e.toString();
         }
     }
 
     function makegoup() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://api.trimill.xyz/number");
-        xhr.send();
-        xhr.onload = () => {
-            document.getElementById("number").innerHTML = xhr.responseText;
+        try {
+            ws.send("inc");
+        } catch(e) {
+            document.getElementById("error").textContent = "Error connecting to server: " + e.toString();
         }
     }
 </script>
@@ -29,4 +32,5 @@
 <div>
     <input type="button" value="Make go up" id="button" onclick="makegoup();" />
 </div>
+<div class="error" id="error"></div>
 {% endblock %}
