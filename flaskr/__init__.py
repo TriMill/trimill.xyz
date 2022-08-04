@@ -62,18 +62,21 @@ def index_blog(app):
     blogposts = []
     blog_dir = os.path.join(app.root_path, "blog")
     for file in os.listdir(blog_dir):
-        with open(os.path.join(blog_dir, file)) as f:
-            contents = f.read()
-        html = markdown2.markdown(contents, extras=markdown_extras)
-        meta = html.metadata
-        meta["file"] = file
-        date_parts = file.removesuffix(".md").split("-")
-        date = datetime.date(int(date_parts[0]), int(date_parts[1]), int(date_parts[2]))
-        meta["timestamp"] = datetime.datetime.fromisoformat(meta["timestamp"])
-        meta["date"] = date
-        meta["n"] = int(date_parts[3])
-        meta["url"] = f"/blog/{date.isoformat().replace('-','/')}/{meta['n']}"
-        blogposts.append(meta)
+        try: 
+            with open(os.path.join(blog_dir, file)) as f:
+                contents = f.read()
+            html = markdown2.markdown(contents, extras=markdown_extras)
+            meta = html.metadata
+            meta["file"] = file
+            date_parts = file.removesuffix(".md").split("-")
+            date = datetime.date(int(date_parts[0]), int(date_parts[1]), int(date_parts[2]))
+            meta["timestamp"] = datetime.datetime.fromisoformat(meta["timestamp"])
+            meta["date"] = date
+            meta["n"] = int(date_parts[3])
+            meta["url"] = f"/blog/{date.isoformat().replace('-','/')}/{meta['n']}"
+            blogposts.append(meta)
+        except Exception as e:
+            print("Error indexing blog post %s: %s" % (file, e))
     return sorted(blogposts, key=lambda post:[post["date"], post["n"]], reverse=True)
 
 def create_app():
