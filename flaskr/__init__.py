@@ -30,7 +30,8 @@ data = {
         "Oversalt to taste",
         "curl -s -L http://bit.ly/10hA8iC | bash",
         "Submit footer text via carrier pigeon to <code>[REDACTED]</code>",
-        "GEORGE is inevitable."
+        "GEORGE is inevitable.",
+        "trimill.xyz is known to the state of California to cause [REDACTED], ███████, and [DATA EXPUNGED]",
     ],
     "next_theme": {
         "system": "dark",
