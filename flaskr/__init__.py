@@ -26,12 +26,13 @@ data = {
         "Your browser does not support 7D graphics. Please update for the best user experience.",
         "Press SPACE to jump",
         "🐀",
-        "If problems persist, please return to the nearest Blockbuster Video® establishment",
+        "If problems persist, please return to the nearest Blockbuster Video® establishment.",
         "Oversalt to taste",
         "curl -s -L http://bit.ly/10hA8iC | bash",
         "Submit footer text via carrier pigeon to <code>[REDACTED]</code>",
         "GEORGE is inevitable.",
         "trimill.xyz is known to the state of California to cause [REDACTED], ███████, and [DATA EXPUNGED]",
+        "Certified <a href=\"https://datatracker.ietf.org/doc/html/rfc9225\">RFC 9225</a> compliant."
     ],
     "next_theme": {
         "system": "dark",
