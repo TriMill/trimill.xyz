@@ -32,7 +32,7 @@ data = {
         "Submit footer text via carrier pigeon to <code>[REDACTED]</code>",
         "GEORGE is inevitable.",
         "trimill.xyz is known to the state of California to cause [REDACTED], ███████, and [DATA EXPUNGED]",
-        "Certified <a href=\"https://datatracker.ietf.org/doc/html/rfc9225\">RFC 9225</a> compliant."
+        "Certified <a href=\"https://datatracker.ietf.org/doc/html/rfc9225\">RFC 9225</a> compliant.",
     ],
     "next_theme": {
         "system": "dark",
