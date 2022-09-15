@@ -33,6 +33,7 @@ data = {
         "GEORGE is inevitable.",
         "trimill.xyz is known to the state of California to cause [REDACTED], ███████, and [DATA EXPUNGED]",
         "Certified <a href=\"https://datatracker.ietf.org/doc/html/rfc9225\">RFC 9225</a> compliant.",
+        "9/10 dentists refused to comment.",
     ],
     "next_theme": {
         "system": "dark",
