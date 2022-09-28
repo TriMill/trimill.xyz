@@ -1,5 +1,8 @@
 {% set meta={"title": "zzcxz visualizer", "desc": "Visualize the structure of <a href=https://zzcxz.citrons.xyz/>zzcxz</a>"} %}
 {% extends "/_base.html" %}
+{% block title %}
+<h1 id="title">zzcxz visualizer</h1>
+{% endblock %}
 {% block head %}
 <style>
     main, #graph {
@@ -8,6 +11,10 @@
     main {
         position: relative;
     }
+    #graph {
+        position: absolute;
+    }
+
     h1 {
         color: var(--fg);
     }
@@ -56,6 +63,7 @@
 <div id="graph" style="width: 90vw;"></div>
 
 <div class="uielems border" id="ui" hidden>
+    <h1 style="font-size: 18px;">ZZCXZ Visualizer</h1>
     <div><a href="javascript:void(0)" id="contract-link">&lt;&lt;</a></div>
     Load page: 
     <input type="text" style="width: 6ch" id="load-page" />
