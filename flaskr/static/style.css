@@ -70,9 +70,22 @@
     --fg-faded: #444444;
     --accent-1: blue;
     --accent-1-dark: darkblue;
-    --accent-2: #0088ff;
-    --accent-2-dark: #004488;
+    --accent-2: blue;
+    --accent-2-dark: darkblue;
     --error: #880000;
+}
+
+:root[theme="contrast-dark"] {
+    --bg: black;
+    --bg-intense: black;
+    --bg-faded: #333333;
+    --fg: white;
+    --fg-faded: #cccccc;
+    --accent-1: #44c0ff;
+    --accent-1-dark: #2280bb;
+    --accent-2: #44c0ff;
+    --accent-2-dark: #2280bb;
+    --error: #ff8888;
 }
 
 :root[theme="special"] {
@@ -175,7 +188,7 @@ a {
     text-decoration: none;
 }
 
-:root[theme="contrast"] a {
+:root[theme="contrast"] a, :root[theme="contrast-dark"] a {
     text-decoration: underline;
 }
 
@@ -210,7 +223,7 @@ pre {
     border-left: 5px solid var(--accent-2-dark);
 }
 
-button, input, select {
+button, input, select, textarea {
     color: var(--fg);
     background-color: var(--bg-faded);
     border: 2px solid var(--fg-faded);
