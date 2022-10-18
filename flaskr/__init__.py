@@ -39,7 +39,8 @@ data = {
         "system": "dark",
         "dark": "light",
         "light": "contrast",
-        "contrast": "system"
+        "contrast": "contrast-dark",
+        "contrast-dark": "system",
     }
 }
 
