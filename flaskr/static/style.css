@@ -201,8 +201,8 @@ a:active { color: var(--link-active); }
 }
 
 p {
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 code, pre {
