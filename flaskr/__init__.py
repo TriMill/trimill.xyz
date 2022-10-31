@@ -99,7 +99,7 @@ def create_app():
     @app.errorhandler(404)
     def four_oh_four(e):
         theme = request.cookies.get("theme") or "dark"
-        return render_template("404.html", data=data, theme=theme)
+        return render_template("404.html", data=data, theme=theme), 404
 
     def load_page(url):
         if url.endswith(".html"):
