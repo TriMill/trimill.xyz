@@ -205,6 +205,12 @@ p {
     margin-bottom: 10px;
 }
 
+blockquote {
+    border-left: 2px solid var(--fg-faded);
+    margin-left: 2px;
+    padding-left: 15px;
+}
+
 code, pre {
     background-color: var(--bg-intense);
     padding-left: 3px;
