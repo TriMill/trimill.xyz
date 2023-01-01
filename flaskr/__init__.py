@@ -4,6 +4,7 @@ import markdown2
 import datetime
 import os
 import ast
+import datetime
 
 markdown_extras = ["fenced-code-blocks", "footnotes", "strike", "tables", "metadata"]
 
@@ -101,23 +102,26 @@ def create_app():
         theme = request.cookies.get("theme") or "dark"
         return render_template("404.html", data=data, theme=theme), 404
 
-    def _load_page(url):
+    def get_theme():
+        return request.args.get("theme") or request.cookies.get("theme") or "dark"
+    
+    def set_theme(resp):
+        resp = make_response(resp)
+        if request.args.get("theme"):
+            resp.set_cookie("theme", request.args["theme"], expires=datetime.datetime.now() + datetime.timedelta(days=30))
+        return resp
+
+    def load_page(url):
         if url.endswith(".html"):
             path = os.path.join(app.root_path, app.template_folder, url)
             if os.path.exists(path):
-                theme = request.args.get("theme") or request.cookies.get("theme") or "dark"
-                return render_template(url, data=data, theme=theme)
+                theme = get_theme() 
+                return set_theme(render_template(url, data=data, theme=theme))
             else:
                 return abort(404)
         else:
             return send_from_directory("templates", url)
 
-    def load_page(url):
-        resp = make_response(_load_page(url))
-        if request.args.get("theme"):
-            resp.set_cookie("theme", request.args["theme"])
-        return resp
-    
     @app.route("/")
     @app.route("/index.html")
     def home():
@@ -135,11 +139,7 @@ def create_app():
 
     @app.route("/blog/")
     def blog_list():
-        theme = request.args.get("theme") or request.cookies.get("theme") or "dark"
-        resp = make_response(render_template("blog.html", data=data, theme=theme))
-        if request.args.get("theme"):
-            resp.set_cookie("theme", request.args["theme"])
-        return resp
+        return set_theme(render_template("blog.html", data=data, theme=theme))
 
     @app.route("/blog/<int:y>/<int:m>/<int:d>/")
     @app.route("/blog/<int:y>/<int:m>/<int:d>/<int:n>")
@@ -152,11 +152,8 @@ def create_app():
                 contents = f.read()
             content = markdown2.markdown(contents, extras=markdown_extras)
             meta = content.metadata
-            theme = request.args.get("theme") or request.cookies.get("theme") or "dark"
-            resp = make_response(render_template("_blog.html", data=data, theme=theme, content=content, date=date, meta=meta))
-            if request.args.get("theme"):
-                resp.set_cookie("theme", request.args["theme"])
-            return resp
+            theme = get_theme()
+            return set_theme(render_template("_blog.html", data=data, theme=theme, content=content, date=date, meta=meta))
         else:
             return abort(404)
 
