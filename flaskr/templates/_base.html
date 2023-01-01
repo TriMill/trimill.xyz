@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" theme="{{ theme }}">
+<html lang="en" class="theme-{{ theme }}">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -31,22 +31,6 @@
     <meta itemprop="name" content="{{ meta.title }}" />
     <meta itemprop="description" content="{{ meta.desc }}" />
  
-    <script>
-        function updateTheme() {
-            let theme = "{{ theme }}" || "dark";
-            let new_theme;
-            if(event.shiftKey) {
-                new_theme = "special";
-            } else {
-                new_theme = {{ data.next_theme | safe }}[theme] || "dark";
-            }
-            let expiry = new Date().getTime() + 1000*60*60*24*90;
-            document.cookie = "theme=" + new_theme
-                + ";expires=" + expiry
-                + ";path=/";
-            location.reload();
-        }
-    </script>
     {% block head %} {% endblock %}
 </head>
 <body>
@@ -55,7 +39,9 @@
         <a href="/">Home</a> ·
         <a href="/projects/">Projects</a> ·
         <a href="/blog/">Blog™</a> ·
-        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" onclick="updateTheme()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8">
+        <a href="?theme={{ data.next_theme[theme] | safe }}">
+            <rect width="8" height="8" fill="#00000000" />
             {% if theme == "dark" %}
             <path d="M2.72 0c-1.58.53-2.72 2.02-2.72 3.78 0 2.21 1.79 4 4 4 1.76 0 3.25-1.14 3.78-2.72-.4.13-.83.22-1.28.22-2.21 0-4-1.79-4-4 0-.45.08-.88.22-1.28z" />
             <title>Dark theme</title>
@@ -76,6 +62,7 @@
             <path d="M3.41 0a.5.5 0 0 0-.13.06l-3 1.5a.5.5 0 1 0 .44.88l3-1.5a.5.5 0 0 0-.31-.94zm1 1.5a.5.5 0 0 0-.13.06l-4 2a.5.5 0 1 0 .44.88l4-2a.5.5 0 0 0-.31-.94zm0 2a.5.5 0 0 0-.13.06l-3 1.5a.5.5 0 0 0 .22.94h2a.5.5 0 0 0 .16-1l1.06-.56a.5.5 0 0 0-.31-.94zm-2.56 3.5a.5.5 0 0 0 .16 1h1a.5.5 0 1 0 0-1h-1a.5.5 0 0 0-.09 0 .5.5 0 0 0-.06 0z" transform="translate(1)" />
             <title>System default theme</title>
             {% endif %}
+        </a>
         </svg>
     </nav>
     <hr style="width: 100%"/>

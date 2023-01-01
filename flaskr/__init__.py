@@ -101,17 +101,23 @@ def create_app():
         theme = request.cookies.get("theme") or "dark"
         return render_template("404.html", data=data, theme=theme), 404
 
-    def load_page(url):
+    def _load_page(url):
         if url.endswith(".html"):
             path = os.path.join(app.root_path, app.template_folder, url)
             if os.path.exists(path):
-                theme = request.cookies.get("theme") or "dark"
+                theme = request.args.get("theme") or request.cookies.get("theme") or "dark"
                 return render_template(url, data=data, theme=theme)
             else:
                 return abort(404)
         else:
             return send_from_directory("templates", url)
 
+    def load_page(url):
+        resp = make_response(_load_page(url))
+        if request.args.get("theme"):
+            resp.set_cookie("theme", request.args["theme"])
+        return resp
+    
     @app.route("/")
     @app.route("/index.html")
     def home():
@@ -129,9 +135,11 @@ def create_app():
 
     @app.route("/blog/")
     def blog_list():
-        theme = request.cookies.get("theme") or "dark"
-        return render_template("blog.html", data=data, theme=theme)
-
+        theme = request.args.get("theme") or request.cookies.get("theme") or "dark"
+        resp = make_response(render_template("blog.html", data=data, theme=theme))
+        if request.args.get("theme"):
+            resp.set_cookie("theme", request.args["theme"])
+        return resp
 
     @app.route("/blog/<int:y>/<int:m>/<int:d>/")
     @app.route("/blog/<int:y>/<int:m>/<int:d>/<int:n>")
@@ -144,8 +152,11 @@ def create_app():
                 contents = f.read()
             content = markdown2.markdown(contents, extras=markdown_extras)
             meta = content.metadata
-            theme = request.cookies.get("theme") or "dark"
-            return render_template("_blog.html", data=data, theme=theme, content=content, date=date, meta=meta)
+            theme = request.args.get("theme") or request.cookies.get("theme") or "dark"
+            resp = make_response(render_template("_blog.html", data=data, theme=theme, content=content, date=date, meta=meta))
+            if request.args.get("theme"):
+                resp.set_cookie("theme", request.args["theme"])
+            return resp
         else:
             return abort(404)
 
