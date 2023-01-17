@@ -139,6 +139,7 @@ def create_app():
 
     @app.route("/blog/")
     def blog_list():
+        theme = get_theme()
         return set_theme(render_template("blog.html", data=data, theme=theme))
 
     @app.route("/blog/<int:y>/<int:m>/<int:d>/")
