@@ -1,16 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@500&display=swap');
+@font-face {
+    font-family: Merriweather;
+    src: url(/static/f/Merriweather-Light.woff2);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Merriweather;
+    src: url(/static/f/Merriweather-LightItalic.woff2);
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: Merriweather;
+    src: url(/static/f/Merriweather-Bold.woff2);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: Merriweather;
+    src: url(/static/f/Merriweather-BoldItalic.woff2);
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Roboto Slab";
+    src: url(/static/f/RobotoSlab-Medium.woff2);
+    font-weight: 500;
+}
 
 @media (prefers-color-scheme: dark) {
     :root.theme-system {
-        --bg: #242328;
-        --bg-intense: #141316;
-        --bg-faded: #373338;
-        --fg: #e0dedc;
-        --fg-faded: #9b9497;
-        --accent-1: #96bf59;
-        --accent-1-dark: #759438;
-        --accent-2: #789ebf;
-        --accent-2-dark: #52729d;
+        --bg: #131720;
+        --bg-intense: #000000;
+        --bg-faded: #293441;
+        --fg: #e6ded6;
+        --fg-faded: #908a81;
+        --accent-1: #2aca98;
+        --accent-1-dark: #268d78;
         --error: #ee6d7d;
     }
     .only-theme-light {
@@ -37,15 +65,13 @@
 }
 
 :root.theme-dark {
-    --bg: #242328;
-    --bg-intense: #141316;
-    --bg-faded: #373338;
-    --fg: #e0dedc;
-    --fg-faded: #9b9497;
-    --accent-1: #96bf59;
-    --accent-1-dark: #759438;
-    --accent-2: #789ebf;
-    --accent-2-dark: #52729d;
+    --bg: #131720;
+    --bg-intense: #000000;
+    --bg-faded: #293441;
+    --fg: #e6ded6;
+    --fg-faded: #908a81;
+    --accent-1: #2aca98;
+    --accent-1-dark: #268d78;
     --error: #ee6d7d;
 }
 
@@ -57,35 +83,7 @@
     --fg-faded: #989097;
     --accent-1: #0642c3;
     --accent-1-dark: #07136d;
-    --accent-2: #0d8101;
-    --accent-2-dark: #045901;
     --error: #a50518;
-}
-
-:root.theme-contrast {
-    --bg: white;
-    --bg-intense: white;
-    --bg-faded: #d0d0d0;
-    --fg: black;
-    --fg-faded: #444444;
-    --accent-1: blue;
-    --accent-1-dark: darkblue;
-    --accent-2: blue;
-    --accent-2-dark: darkblue;
-    --error: #880000;
-}
-
-:root.theme-contrast-dark {
-    --bg: black;
-    --bg-intense: black;
-    --bg-faded: #333333;
-    --fg: white;
-    --fg-faded: #cccccc;
-    --accent-1: #44c0ff;
-    --accent-1-dark: #2280bb;
-    --accent-2: #44c0ff;
-    --accent-2-dark: #2280bb;
-    --error: #ff8888;
 }
 
 :root.theme-special {
@@ -96,31 +94,29 @@
     --fg-faded: #ff0000;
     --accent-1: #00ffff;
     --accent-1-dark: #0000ff;
-    --accent-2: #000000;
-    --accent-2-dark: #00ffff;
-    --error: #00ff88;
+    --error: #000000;
     font-family: "Comic Sans MS", cursive;
 }
 
 :root {
     color: var(--fg);
-    font-family: "Lato", sans-serif;
-    font-size: 20px;
+    --text-fonts: "Merriweather", "DejaVu Serif", serif;
+    font-family: var(--text-fonts);
+    font-size: 19px;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.6;
     --link: var(--accent-1);
     --link-hover: var(--accent-1-dark);
     --link-active: var(--accent-1-dark);
     --button: var(--bg-intense);
     --button-hover: var(--bg-faded);
-    --button-active: var(--accent-2-dark);
+    --button-active: var(--accent-1-dark);
     overflow-wrap: break-word;
 }
 
 h1, h2, h3, nav {
     font-family: "Roboto Slab", serif;
     font-weight: 500;
-    margin-left: 20px;
     margin-top: 16px;
     margin-bottom: 16px;
 }
@@ -129,6 +125,8 @@ h1 {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 4px;
+    margin-bottom: 0px;
 }
 
 body {
@@ -142,6 +140,15 @@ body {
 
 main {
     flex-grow: 1;
+}
+
+hr {
+    width: 100%;
+}
+
+section {
+    padding-left: 10px;
+    background-color: var(--bg-intense);
 }
 
 footer {
@@ -226,7 +233,7 @@ pre {
     padding-top: 3px;
     padding-bottom: 3px;
     padding-left: 12px;
-    border-left: 5px solid var(--accent-2-dark);
+    border-left: 5px solid var(--accent-1-dark);
 }
 
 button, input, select, textarea {
@@ -234,7 +241,7 @@ button, input, select, textarea {
     background-color: var(--bg-faded);
     border: 2px solid var(--fg-faded);
     border-radius: 3px;
-    font-family: "Lato", sans-serif;
+    font-family: var(--text-fonts);
     font-size: 16px;
 }
 

@@ -39,9 +39,7 @@ data = {
     "next_theme": {
         "system": "dark",
         "dark": "light",
-        "light": "contrast",
-        "contrast": "contrast-dark",
-        "contrast-dark": "system",
+        "light": "system",
     }
 }
 

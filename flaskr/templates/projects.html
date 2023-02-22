@@ -2,19 +2,82 @@
 {% extends "/_base.html" %}
 {% block content %}
 
-<p>Here are some projects I have made over the past few years.</p>
+<h2><a href="https://g.trimill.xyz/trimill/complexpr">complexpr</a></h2>
+<p>
+    Complexpr is a toy programming language with an interpreter written in Rust. It is dynamically typed, with 
+    native support for rational and complex numbers, lists and maps, and first-class functions. It features
+    pipeline operators (similar to Elixir's <code>|&gt;</code>) to express nested function calls more cleanly.
+</p>
 
-<ul>
-{% for site in data.projects %}
-{% if site.hidden != True %}
-<li>
-{% if site.star == True %}
-★
-{% endif %}
-<a href="/projects/{{ site.path }}/">{{ site.title }}</a> · {{ site.desc | safe }}
-</li>
-{% endif %}
-{% endfor %}
-</ul>
+<h2><a href="https://g.trimill.xyz/trimill/quectocraft">Quectocraft</a></h2>
+<p>
+    Quectocraft is an extensible, ultra-minimalist implementation of a Minecraft server. By doing away with most
+    features of the vanilla server (such as world generation and interaction) it can run without consuming many system
+    resources. It is written primarily in Rust, but can load simple plugins written in Lua to add chat features and commands.
+</p>
+
+<h2><a href="https://g.trimill.xyz/trimill/rss-bundler">RSS Bundler</a></h2>
+<p>
+    RSS Bundler is a tool that bundles multiple RSS feeds into one. At a fixed interval it fetches content from the configured
+    feeds, merges them together, and stores and serves the result. RSS Bundler is written in Rust.
+</p>
+
+<h2><a href="/projects/complex_grapher">Complex grapher</a></h2>
+<p>
+    Complex grapher allows you to functions using <a href="https://en.wikipedia.org/wiki/Domain_coloring">domain coloring</a>. 
+    Functions are written in a custom expression language and compiled to GLSL. WebGL is then used to generate a color for each pixel. 
+    Complex grapher also has support for iterating functions, allowing you to generate fractals such as the Mandelbrot and Julia sets.
+</p>
+
+<h2><a href="/projects/zzcxz_vis">zzcxz visualizer</a></h2>
+<p>
+    zzcxz visualizer displays a force-directed graph of <a href="https://zzcxz.citrons.xyz/">zzcxz</a>, a collaborative interactive
+    fiction project. It is written in JavaScript and uses D3.js.
+</p>
+
+<h2><a href="https://g.trimill.xyz/trimill/sysh">sysh</a></h2>
+<p>
+    sysh is a shell that allows users to run Linux syscalls directly. It supports the entire set of x86_64 syscalls, as well as 
+    several other commands to manage memory, manipulate data, and perform arithmetic. sysh is written in C, using Python to
+    automatically generate some code.
+</p>
+
+<h2><a href="https://g.trimill.xyz/trimill/musidl">Musidl</a></h2>
+<p>
+    Musidl is a Bash script that downloads music using <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> and 
+    automatically add ID3v2 tags based on Youtube Music metadata.
+</p>
+
+<h2><a href="/projects/mazemaker">Maze maker</a></h2>
+<p>
+    Generate random mazes based on a variety of parameters. Written in JavaScript using <a href="https://p5js.org/">p5.js</a>.
+</p>
+
+<h2><a href="/projects/converter">Unit converter</a></h2>
+<p>
+    Convert between various different units, including commonly-used ones as well as unusual or archaic ones.
+</p>
+
+
+<h2><a href="/projects/fracbase">Fraction base converter</a></h2>
+<p>
+    Convert a fraction to its positional notation in an arbitrary base.
+</p>
+
+<h2><a href="/projects/number">number</a></h2>
+<p>
+    Make number go up.
+</p>
+
+<h2><a href="/projects/pixelcircle">Pixel circle</a></h2>
+<p>
+    Create pixelated circles with a specified radius.
+</p>
+
+<h2><a href="/projects/stars">Stars</a></h2>
+<p>
+    Generate stars.
+</p>
+
 
 {% endblock %}

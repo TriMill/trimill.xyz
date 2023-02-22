@@ -2,29 +2,40 @@
 {% extends "/_base.html" %}
 {% block content %}
 
-<p>
-Welcome! On this website you may view a multitude of content, including numerous 
-<a href="/projects/">projects</a>, a <a href="/blog/">Blog™</a>, and various other information contained on 
-this page. Enjoy.
-</p>
-
 <h2>About</h2>
 <p>
-I am a person (proof of this fact is left to the reader) who has been granted an internet connection and uses 
-it extensively for assorted purposes.  I enjoy many things, most of which involve manipulating some state
-according to various sets of rules.
+    I am a person (proof of this fact is left to the reader) who has been granted an internet connection and uses 
+    it extensively for assorted purposes.  I enjoy many things, most of which involve manipulating some state
+    according to various sets of rules.
 </p>
-<h2>GEORGE</h2>
+
+<h2>Projects</h2>
+<ul>
+    <li><a href="projects/complex_grapher">Complex Grapher</a> - Graph complex functions online</li>
+    <li><a href="projects/complex_grapher">zzcxz visualizer</a> - Force-directed graph of <a href="https://zzcxz.citrons.xyz/">zzcxz</a> using D3.js</a>
+    <li><a href="https://g.trimill.xyz/trimill/complexpr">complexpr</a> - A toy programming language with an interpreter written in Rust</li>
+    <li><a href="https://g.trimill.xyz/trimill/Quectocraft">Quectocraft</a> - An ultra-minimalist implementation of a Minecraft server in Rust and Lua</li>
+    <li><a href="https://g.trimill.xyz/trimill/rss-bundler">RSS Bundler</a> - Bundle multiple RSS feeds into one</li>
+</ul>
 <p>
-<a href="https://george.gh0.pw">GEORGE</a> is a webring of which I am a member. Use the standard-issue GEORGEbox 
-below to view the GEORGE homepage or access the previous and next members in the ring.
+    See more on the <a href="projects">projects page</a> and on <a href="https://g.trimill.xyz/trimill">my Forgejo instance</a>.
 </p>
+
+<h2>Contact</h2>
+<p>
+    Email: trimill012 ("at" sign) gmail (full stop) com <br />
+    Discord: trimill#6898 <br />
+    Forgejo: <a href="https://g.trimill.xyz/">trimill</a> <br />
+    GitHub: <a href="https://github.com/TriMill/">trimill</a> <br />
+    Youtube: <a href="https://www.youtube.com/@trimill012">trimill</a> <br />
+</p>
+
+{% endblock %}
+
+{% block footer_content %}
+
 {% if theme == "light" %}
 <iframe height="50" src="https://george.gh0.pw/embed.cgi?trimill&c_bg=%23f6f5f2&c_fg=%2328262b&c_links=%230642c3&c_george=%230d8101&c_underline=%230d8101" style="border:none;width:100%;" sandbox="allow-top-navigation"></iframe>
-{% elif theme == "contrast" %}
-<iframe height="50" src="https://george.gh0.pw/embed.cgi?trimill" style="border:none;width:100%;" sandbox="allow-top-navigation"></iframe>
-{% elif theme == "contrast-dark" %}
-<iframe height="50" src="https://george.gh0.pw/embed.cgi?trimill&c_bg=%23000000&c_fg=%23ffffff&c_links=%2344c0ff&c_george=%2344c0ff&c_underline=%2344c0ff" style="border:none;width:100%;" sandbox="allow-top-navigation"></iframe>
 {% elif theme == "special" %}
 <iframe height="50" src="https://george.gh0.pw/embed.cgi?trimill&c_bg=%23ffff00&c_fg=%23ff00ff&c_links=%2300ffff&c_george=%2300ff00&c_underline=%2300ff00" style="border:none;width:100%;" sandbox="allow-top-navigation"></iframe>
 {% elif theme == "system" %}
@@ -34,27 +45,6 @@ below to view the GEORGE homepage or access the previous and next members in the
 <iframe height="50" src="https://george.gh0.pw/embed.cgi?trimill&c_bg=%23242328&c_fg=%23e0dedc&c_links=%2396bf59&c_george=%23789ebf&c_underline=%23789ebf" style="border:none;width:100%;" sandbox="allow-top-navigation"></iframe>
 {% endif %}
 
-<h2>Other places I exist</h2>
-<p>
-Email: trimill012 ("at" sign) gmail (full stop) com <br />
-Discord: trimill#6898 <br />
-Forgejo: <a href="https://g.trimill.xyz/">trimill</a> <br />
-GitHub: <a href="https://github.com/TriMill/">trimill</a> <br />
-Youtube: <a href="https://www.youtube.com/@trimill012">trimill</a> <br />
-</p>
-
-<h2>Source code & attribution</h2>
-<p>
-The source code for this website is available <a href="https://g.trimill.xyz/trimill/trimill.xyz/">on my Forgejo instance</a> and is 
-released under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPLv3</a> free and open-source license.
-It is built using the <a href="https://flask.palletsprojects.com/en/2.1.x/">Flask</a> web framework and incorporates
-icons from <a href="https://useiconic.com/open">Open Iconic</a>. The <a href="https://citrons.xyz/a/memetic-apioform-page.html">memetic apioform page</a>
-was not involved at all in this site's creation, yet for some reason I feel compelled to link it here.
-</p>
-
-<br />
-
-<div style="color: var(--fg-faded); text-align: center;">johnvertisement</div>
 <p>
 <iframe src="https://john.citrons.xyz/embed?ref=trimill.xyz" style="margin-left:auto;display:block;margin-right:auto;max-width:732px;width:100%;height:94px;border:none;"></iframe>
 </p>
