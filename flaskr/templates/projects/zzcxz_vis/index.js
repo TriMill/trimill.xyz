@@ -153,7 +153,6 @@ function selectNode(node) {
 
 function visualize() {
     document.getElementsByTagName("body")[0].style.width = "min(2000px, 90vw)";
-    document.getElementById("title").hidden = true;
     const zoom = d3.zoom();
     zoom.on("zoom", event => {
         const elems = d3.select("#elems")
