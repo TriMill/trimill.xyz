@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <title>Blog™</title>
-    <link href="https://trimill.xyz/blog/atom.xml" rel="self" />
-    <link href="https://trimill.xyz/blog/" />
-    <updated>{{ data.blogposts[0].timestamp.isoformat() }}</updated>
-    <author>
-        <name>TriMill</name>
-    </author>
-    <id>https://trimill.xyz/blog/</id>
+	<title>Blog™</title>
+	<link href="https://trimill.xyz/blog/atom.xml" rel="self" />
+	<link href="https://trimill.xyz/blog/" />
+	<updated>{{ data.blogposts[0].timestamp.isoformat() }}</updated>
+	<author>
+		<name>TriMill</name>
+	</author>
+	<id>https://trimill.xyz/blog/</id>
 
-    {% for post in data.blogposts %}
-    <entry>
-        <title>{{ post.title }}</title>
-        <link href="https://trimill.xyz/{{ post.url }}" />
-        <summary>{{ post.desc }}</summary>
-        <updated>{{ post.timestamp.isoformat() }}</updated>
-        <id>https://trimill.xyz/{{ post.url }}</id>
-    </entry>
-    {% endfor %}
+	{% for post in data.blogposts %}
+	<entry>
+		<title>{{ post.title }}</title>
+		<link href="https://trimill.xyz/{{ post.url }}" />
+		<summary>{{ post.desc }}</summary>
+		<updated>{{ post.timestamp.isoformat() }}</updated>
+		<id>https://trimill.xyz/{{ post.url }}</id>
+	</entry>
+	{% endfor %}
 </feed>
