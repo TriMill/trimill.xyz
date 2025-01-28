@@ -1,15 +1,15 @@
 let length = {
-  units: ['Picometer', 'Nanometer', 'Micrometer', 'Millimeter', 'Centimeter',
-    'Decimeter', 'Meter', 'Decameter', 'Hectometer', 'Kilometer', 'Megameter',
-    'Gigameter', 'Barleycorn', 'Thou', 'Digit', 'Inch', 'Palm', 'Stick', 'Hand',
+  units: ['Quectometer', 'Rontometer', 'Yoctometer', 'Zeptometer', 'Attometer', 'Femtometer', 'Picometer', 'Nanometer', 'Micrometer', 'Millimeter', 'Centimeter',
+    'Decimeter', 'Meter', 'Decameter', 'Hectometer', 'Kilometer', 'Megameter', 'Gigameter', 'Terameter', 'Petameter', 'Exameter', 'Zettameter', 'Yottameter', 'Ronnameter', 'Quettameter',
+    'Barleycorn', 'Thou', 'Digit', 'Inch', 'Palm', 'Stick', 'Hand',
     'Link', 'Foot', 'Yard', 'Rod', 'Fathom', 'Chain', 'Shackle', 'Cable', 'Furlong',
     'Mile', 'Nautical Mile', 'League', 'AU', 'Light-Year', 'Smoot'],
   common: 'Meter',
   ctype: 'mul',
   select: ['Meter', 'Foot'],
-  conversions: [1e-12, 1e-9, 1e-6, 0.001, 0.01,
-    0.1, 1, 10, 100, 1000, 1e+6,
-    1e+9, 127/15000, 0.0000254, 0.01905, 0.0254, 0.0508, 0.0762, 0.1016,
+  conversions: [1e-30, 1e-27, 1e-24, 1e-21, 1e-18, 1e-15, 1e-12, 1e-9, 1e-6, 0.001, 0.01,
+    0.1, 1, 10, 100, 1000, 1e+6, 1e+9, 1e+12, 1e+15, 1e+18, 1e+21, 1e+24, 1e+27, 1e+30,
+    127/15000, 0.0000254, 0.01905, 0.0254, 0.0508, 0.0762, 0.1016,
     0.201168, 0.3048, 0.9144, 5.0292, 1.852, 20.1168, 27.432, 185.2, 201.168,
     1609.344, 1852, 4828.032, 149597870700, 9460730472580800, 1.7],
   custom: [['Foot', 'Inch', 12], ['Yard', 'Foot', 3], ['Mile', 'Foot', 5280],
@@ -96,10 +96,12 @@ let energy = {
 }
 
 let computing = {
-  units: ['Bit', 'Kibibit', 'Kilobit', 'Mebibit', 'Megabit', 'Gibibit', 'Gigabit', 'Tebibit', 'Terabit', 'Pebibit', 'Petabit', 'Ebibit', 'Exabit', 'Zebibit', 'Zettabit', 'Yobibit', 'Yottabit', 'Nibble', 'Byte', 'Kibibyte', 'Kilobyte', 'Mebibyte', 'Megabyte', 'Gibibyte', 'Gigabyte', 'Tebibyte', 'Terabyte', 'Pebibyte', 'Petabyte', 'Ebibyte', 'Exabyte', 'Zebibyte', 'Zettabyte','Yobibyte', 'Yottabyte'],
+  units: ['Bit', 'Kibibit', 'Kilobit', 'Mebibit', 'Megabit', 'Gibibit', 'Gigabit', 'Tebibit', 'Terabit', 'Pebibit', 'Petabit', 'Ebibit', 'Exabit', 'Zebibit', 'Zettabit', 'Yobibit', 'Yottabit', 'Ronnabit', 'Ronnabyte', 'Quettabit', 'Quettabyte', 'Nibble', 'Byte', 'Kibibyte', 'Kilobyte', 'Mebibyte', 'Megabyte', 'Gibibyte', 'Gigabyte', 'Tebibyte', 'Terabyte', 'Pebibyte', 'Petabyte', 'Ebibyte', 'Exabyte', 'Zebibyte', 'Zettabyte','Yobibyte', 'Yottabyte', 'Robibit', 'Robibyte', 'Quebibit', 'Quebibyte'],
   common: 'Byte',
   ctype: 'mul',
   select: ['Gigabyte', 'Megabyte'],
-  conversions: [1/8, 2**7, 10**3/8, 2**17, 10**6/8, 2**27, 10**9/8, 2**37, 10**12/8, 2**47, 10**15/8, 2**57, 10**18/8, 2**67, 10**21/8, 2**77, 10**24/8, 1/2, 1, 2**10, 10**3, 2**20, 10**6, 2**30, 10**9, 2**40, 10**12, 2**50, 10**15, 2**60, 10**18, 2**70, 10*21, 2**80, 10**24],
+  conversions: [
+    1/8, 2**7, 10**3/8, 2**17, 10**6/8, 2**27, 10**9/8, 2**37, 10**12/8, 2**47, 10**15/8, 2**57, 10**18/8, 2**67, 10**21/8, 2**77, 10**24/8, 2**87, 10**27/8, 2**97, 10**30/8,
+    1/2, 1, 2**10, 10**3, 2**20, 10**6, 2**30, 10**9, 2**40, 10**12, 2**50, 10**15, 2**60, 10**18, 2**70, 10*21, 2**80, 10**24, 2**90, 10**27, 2**100, 10**30],
   custom: []
 }
